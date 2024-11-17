@@ -28,14 +28,14 @@ client = boto3.client(
     region_name="us-west-2",
 )
 
-# The model ID for the model you want to use
+# The model ID for the model you want to use. Claude in our case
 model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
 
-# SUMMARY OF ORIGINAL DOCUMENT
+# Summary of Input document/URL
 @app.route('/summarize', methods=['POST'])
 def summarize():
     input = request.form['user_input']
-
+    # Prompt Engineering
     user_message = "Tell me about this document's most important key points, and a short paragraph summary.\n"
     user_message += "Do not include any leading or ending points. Only include the key points and summary.\n"
     user_message += input
@@ -50,6 +50,7 @@ def summarize():
     summary_output = ''
 
     try:
+        # constantly calling the API to produce a summary output at the end. Done in chunks
         streaming_response = client.converse_stream(
             modelId=model_id,
             messages=summaryConversation,
@@ -68,11 +69,11 @@ def summarize():
         return(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
 
 
-# NEWS KEYWORDS OF SUMMARY
+# Prepares keywords for the News 
 @app.route('/newskeywords', methods=['POST'])
 def newskeywords():
     input = request.form['user_input']
-
+    # Prompt Engineering for keywords
     keyword_getter = "Give me 4 key words about this passage (only the keywords, don't include anything (like 'keywords:') in the front or back), in one line, separated by ONLY spaces and a single commas\n"
     keyword_getter += input
     keyword_output = ""
@@ -114,6 +115,7 @@ def newskeywords():
     except (ClientError, Exception) as e:
         return(f"Cannot find a related article.....")
 
+# Uses the Keywords from before to find articles from the past month with NewsAPI
 def getNews(keywords):
     topics = keywords
     s = None
@@ -137,7 +139,7 @@ def getNews(keywords):
     source1 = []
     source2 = []
     source3 = []
-
+    # returns titles and urls of articles
     for source in all_articles['articles']:
         if source1 == []:
             source1.append(source['title'])
@@ -151,7 +153,7 @@ def getNews(keywords):
         else:
             return [source1, source2, source3]
         
-
+# Gets keywords for the articles
 @app.route('/researchkeywords', methods=['POST'])
 def researchkeywords():
     input = request.form['user_input']
@@ -174,7 +176,7 @@ def researchkeywords():
             inferenceConfig={"maxTokens": 75, "temperature": 0.5, "topP": 0.9},
         )
 
-        # Extract and print the streamed response text in real-time.
+        # Extract and print the streamed response
         for chunk in streaming_response["stream"]:
             if "contentBlockDelta" in chunk:
                 text = chunk["contentBlockDelta"]["delta"]["text"]
@@ -193,22 +195,22 @@ def researchkeywords():
         return(f"Cannot find a related research paper.....")
 
 def getPapers(keywords, max_results=3):
-    # Base URL for arXiv API
+    # Base URL for arXiv
     base_url = "http://export.arxiv.org/api/query?"
 
-    # Construct the query with the provided keywords
-    search_query = f"search_query={keywords}"  # For example, 'machine learning'
+    # Makes Search query with the provided keywords
+    search_query = f"search_query={keywords}"  
     start_index = 0
     max_results = max_results
 
-    # URL with search query and result limits
+    # URL 
     url = f"{base_url}{search_query}&start={start_index}&max_results={max_results}"
 
-    # Send the request to the arXiv API
+    
     response = requests.get(url)
 
     if response.status_code == 200:
-        # Parse the XML response
+        # XML Namespace used in arXiv's response
         root = ET.fromstring(response.content)
         entries = root.findall("{http://www.w3.org/2005/Atom}entry")
 
@@ -218,11 +220,11 @@ def getPapers(keywords, max_results=3):
             author_list = entry.findall("{http://www.w3.org/2005/Atom}author")
             authors = [author.find("{http://www.w3.org/2005/Atom}name").text for author in author_list]
             summary = entry.find("{http://www.w3.org/2005/Atom}summary").text
-            arxiv_id = entry.find("{http://www.w3.org/2005/Atom}id").text  # This is the arXiv ID
+            arxiv_id = entry.find("{http://www.w3.org/2005/Atom}id").text  
 
-            # Format the arXiv link
+            # Format the link
             arxiv_link = arxiv_id.replace("http://arxiv.org/abs/", "https://arxiv.org/abs/")
-
+            
             papers.append({
                 "title": title,
                 "authors": authors,
