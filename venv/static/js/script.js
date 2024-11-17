@@ -1,5 +1,5 @@
 function summarize() {
-    if (document.getElementById('resultText').innerHTML == "Your processed summary will appear here.") {
+    if (document.getElementById('userInput').value == "") {
         document.getElementById('resultText').innerHTML = "No valid input.";
         return;
     }
@@ -28,7 +28,7 @@ function summarize() {
 }
 
 function news() {
-    if (document.getElementById('news').innerHTML == "Your relevant news articles will appear here.") {
+    if (document.getElementById('userInput').value == "") {
         document.getElementById('news').innerHTML = "No valid input.";
         return;
     }
@@ -50,14 +50,14 @@ function news() {
     .then(data => {
         // Display the response from Python in the 'news' section
         data = data.substring(0, data.length - 4);  // gets rid of beginning and end quote from jsonify
-        document.getElementById('news').innerHTML = "No valid input.";
+        document.getElementById('news').innerHTML = "";
         document.getElementById('news').innerHTML += data;
     });
 }
 
 function research() {
-    if (document.getElementById('research').innerHTML == "Your relevant research papers will appear here.") {
-        document.getElementById('research').innerHTML = "";
+    if (document.getElementById('userInput').value == "") {
+        document.getElementById('research').innerHTML = "No valid input.";
         return;
     }
 
