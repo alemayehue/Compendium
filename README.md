@@ -72,7 +72,7 @@ This project uses Claude AI to extract key points and summarize articles based o
    ```
 
 8. **Move Project Files:**
-   - Move the `static` folder and `converse.py` file into the `venv` folder.
+   - Move the `static` folder, `templates` folder, and `converse.py` file into the `venv` folder.
 
 9. **Run the Application:**
    Run the `converse.py` script using the following command:
