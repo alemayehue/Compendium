@@ -50,7 +50,6 @@ This project uses Claude AI to extract key points and summarize articles based o
       ```
       venv
       INRIX-Access
-      .env
       ```
 
 6. **Set Up AWS Credentials:**
