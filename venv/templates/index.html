@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text and Link Processor</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Enter Text and Links</h1>
+
+    <!-- Text area for the document text -->
+    <input type="text" id="userInput" placeholder="Enter your text or link here..." rows="10" cols="50"></textarea>
+
+    <!-- Button to trigger the processing -->
+    <button onclick="summarize(); news(); research()">Process</button>
+
+    <!-- Output area to display the result -->
+    <div id="response">
+      <h2>Summary</h2>
+      <p id="resultText">Your processed summary will appear here.</p>
+    </div>
+
+    
+    <!-- Two side-by-side boxes -->
+    <div class="link-container">
+      <!-- Left header and box -->
+      <div class="linkbox">
+        <h3>News Articles</h3>
+        <p id="news">Your relevant news articles will appear here.</p>
+      </div>
+    
+      <!-- Right header and box -->
+      <div class="linkbox">
+        <h3>Research Papers</h3>
+        <p id="research">Your relevant research links will appear here.</p>
+      </div>
+    </div>    
+  </div>
+
+  <script src="/static/js/script.js"></script>
+</body>
+</html>
