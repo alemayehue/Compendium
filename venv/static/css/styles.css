@@ -1,4 +1,3 @@
-
 body {
   font-family: Merriweather, serif;
   background: linear-gradient(105deg, #6e7bff, #9c79fc); /* Soft gradient hue */
@@ -53,7 +52,7 @@ input:hover {
 
 button {
   display: block; /* Makes the button behave like a block-level element */
-  width: 100%; /* Sets the default width to 90% of the container */
+  width: 100%;
   padding: 10px;
   background-color: #4CAF50;
   color: white;
@@ -83,7 +82,7 @@ button:hover {
 .linkbox {
   flex: 1;
   padding: 15px;
-  max-height: 200px;
+  max-height: 200px;  /* allows for overflow and scrolling */
   overflow-y: auto;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
@@ -93,7 +92,7 @@ button:hover {
 #response {
   margin-top: 20px;
   background-color: #f0f0f0;
-  max-height: 200px;
+  max-height: 200px;  /* allows for overflow and scrolling */
   overflow-y: auto;
   padding: 15px;
   border-radius: 4px;

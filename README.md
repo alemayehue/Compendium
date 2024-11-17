@@ -37,15 +37,21 @@ This project uses Claude AI to extract key points and summarize articles based o
    ```
 
 4. **Install Dependencies:**
-   - Move the `requirements.txt` file into the `venv` folder.
+   - Move the `requirements.txt` file from our `venv` folder into your `venv` folder.
    - Run the following command to install the dependencies listed in the `requirements.txt` file:
 
    ```bash
    pip3 install -r requirements.txt
    ```
 
-5. **Move Configuration Files:**
-   - Move the `.env` file and `.gitignore` file into the `venv` folder.
+5. **Create Configuration Files:**
+   - Create a `.env` file and `.gitignore` file in the `venv` folder.
+   - The .gitignore should say
+      ```
+      venv
+      INRIX-Access
+      .env
+      ```
 
 6. **Set Up AWS Credentials:**
    The `.env` file should contain your AWS credentials in the following format:

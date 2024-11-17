@@ -15,8 +15,8 @@ function summarize() {
     })
     .then(response => response.text())  // Get the response from the server
     .then(data => {
-        // Display the response from Python in the <div>
-        data = data.substring(1, data.length - 2);  // gets rid of beginning and end quote
+        // Display the response from Python in the 'resultText' section
+        data = data.substring(1, data.length - 2);  // gets rid of beginning and end quote from jsonify
         document.getElementById('resultText').innerHTML = "";
         document.getElementById('resultText').innerHTML += data;
     });
@@ -38,8 +38,8 @@ function news() {
     })
     .then(response => response.text())  // Get the response from the server
     .then(data => {
-        // Display the response from Python in the <div>
-        data = data.substring(0, data.length - 4);  // gets rid of beginning and end quote
+        // Display the response from Python in the 'news' section
+        data = data.substring(0, data.length - 4);  // gets rid of beginning and end quote from jsonify
         document.getElementById('news').innerHTML = "";
         document.getElementById('news').innerHTML += data;
     });
