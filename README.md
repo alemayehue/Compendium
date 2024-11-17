@@ -29,10 +29,11 @@ This project uses Claude AI to extract key points and summarize articles based o
    ```
 
 3. **Activate the Virtual Environment:**
-   Activate the virtual environment:
+   Activate the virtual environment and move into it:
 
    ```bash
    source ./venv/bin/activate
+   cd venv
    ```
 
 4. **Install Dependencies:**
