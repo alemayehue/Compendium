@@ -2,6 +2,9 @@
 
 This project uses Claude AI to extract key points and summarize articles based on user input. It gathers relevant keywords and then provides recent articles (within the past month) and research papers (from any time) based on the extracted keywords.
 
+## Demo
+https://youtu.be/SVOS7w1R5TE
+
 ## Features
 
 - **Input Handling**: Take user input in the form of text or URL and process it using Claude AI.
@@ -76,10 +79,17 @@ This project uses Claude AI to extract key points and summarize articles based o
    pip3 install newsapi-python
    ```
 
-8. **Move Project Files:**
+8. **Install Flask:**
+   Run the following command to install `Flask`:
+
+   ```bash
+   pip3 install Flask
+   ```
+   
+9. **Move Project Files:**
    - Move our `static` folder, `templates` folder, and `converse.py` file into your `venv` folder.
 
-9. **Run the Application:**
+10. **Run the Application:**
    Run the `converse.py` script using the following command:
 
    ```bash
