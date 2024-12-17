@@ -1,4 +1,4 @@
-# Compendium
+# Compendium (Elias Alemayehu, Ethan Diec, Guanyi Liu, Jacob Rhoades)
 
 This project uses Claude AI to extract key points and summarize articles based on user input. It gathers relevant keywords and then provides recent articles (within the past month) and research papers (from any time) based on the extracted keywords.
 
